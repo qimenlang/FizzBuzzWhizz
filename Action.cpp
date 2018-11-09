@@ -1,11 +1,11 @@
 #include "Action.h"
 
-string SpecialNumAction::excute(int InNum)
+string SpecialNumAction::excute(int num)
 {
-	return BaseStr;
+	return base;
 }
 
-string DefaultAction::excute(int InNum)
+string DefaultAction::excute(int num)
 {
-	return to_string(InNum);
+	return to_string(num);
 }

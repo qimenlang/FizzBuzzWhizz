@@ -5,17 +5,17 @@ class Action
 {
 public:
 	virtual ~Action() {};
-	virtual string excute(int InNum) = 0;
+	virtual string excute(int num) = 0;
 };
 
 class SpecialNumAction :public Action
 {
 public:
-	SpecialNumAction(const string& InStr):BaseStr(InStr){}
+	SpecialNumAction(const string& str):base(str){}
 	~SpecialNumAction() {};
-	virtual string excute(int InNum) override;
+	virtual string excute(int num) override;
 private:
-	string BaseStr;
+	string base;
 };
 
 class DefaultAction :public Action
@@ -23,5 +23,5 @@ class DefaultAction :public Action
 public:
 	DefaultAction() {};
 	~DefaultAction() {};
-	virtual string excute(int InNum) override;
+	virtual string excute(int num) override;
 };

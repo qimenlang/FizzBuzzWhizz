@@ -8,7 +8,7 @@ class Rule
 {
 public:	
 	virtual ~Rule() {};
-	virtual  string Apply(int Num) = 0;
+	virtual  string Apply(int num) = 0;
 
 };
 
@@ -17,7 +17,7 @@ class Atom:public Rule
 public:
 	Atom(Matcher* InMatcher, Action* InAction):AtomMatcher(InMatcher),AtomAction(InAction) {};
 	~Atom() {};
-	virtual  string Apply(int Num) override;
+	virtual  string Apply(int num) override;
 private:
 	Matcher* AtomMatcher;
 	Action* AtomAction;
@@ -26,19 +26,19 @@ private:
 class AllOf:public Rule
 {
 public:
-	AllOf(vector<Rule*>&& InRules) :Rules(InRules) {};
+	AllOf(vector<Rule*>&& rules) :rules(rules) {};
 	~AllOf() {};
-	virtual  string Apply(int Num) override;
+	virtual  string Apply(int num) override;
 private:
-	vector<Rule*> Rules;
+	vector<Rule*> rules;
 };
 
 class AnyOf :public Rule
 {
 public:
-	AnyOf(vector<Rule*>&& InRules) :Rules(InRules) {};
+	AnyOf(vector<Rule*>&& rules) :rules(rules) {};
 	~AnyOf() {};
-	virtual  string Apply(int Num) override;
+	virtual  string Apply(int num) override;
 private:
-	vector<Rule*> Rules;
+	vector<Rule*> rules;
 };

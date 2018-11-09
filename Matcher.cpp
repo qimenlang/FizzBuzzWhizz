@@ -1,17 +1,17 @@
 #include "Matcher.h"
-bool Times_Ni::match(int InNum)
+bool TimesMatcher::match(int num)
 {
-	return InNum%base == 0;
+	return num%base == 0;
 }
 
-bool Contains_Ni::match(int InNum)
+bool ContainsMatcher::match(int num)
 {
-	string Num = to_string(InNum);
-	return Num.find(to_string(base))!=string::npos;
+	string number = to_string(num);
+	return number.find(to_string(base))!=string::npos;
 
 }
 
-bool Always::match(int InNum)
+bool Always::match(int num)
 {
 	return true;
 }

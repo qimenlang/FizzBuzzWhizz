@@ -6,55 +6,31 @@ using namespace std;
 
 int main()
 {
-	/*
-	r1n1=Times_ni,3->Special_Action(3)->Fizz
-	r2n2=Times_ni,5->Special_Action(5)->Buzz
-	r3n3=Times_ni,7->Special_Action(7)->Whizz
-	r1=Allof(r1n1,r2n2,r3n3)
-	r2=Contains_ni,3->Special_Action(3)->Fizz
-	r3=NoMatch,NoAction
+	Matcher* matcher_always = new Always();
+	Action* action_default = new DefaultAction();
 
-	Matcher
-	Times_ni
-	Contains_ni
-	NoMatcher
-	Actor
-	Special_Action(3)->Fizz
-	Special_Action(5)->Buzz
-	Special_Action(7)->Whizz
-	NoAction
-	Rule
-	Actom
-	AllOf
-	AnyOf
+	Matcher* matcher_times_3 = new TimesMatcher(3);
+	Matcher* matcher_times_5 = new TimesMatcher(5);
+	Matcher* matcher_times_7 = new TimesMatcher(7);
 
-	AnyOf(r2,r1,r3)
-	AnyOf(r2,AllOf(r1n1,r2n2,r3n3),r3)
-	*/
-	Matcher* Matcher_Always = new Always();
-	Action* Action_Default = new DefaultAction();
+	Matcher* matcher_contains_3 = new ContainsMatcher(3);
 
-	Matcher* Matcher_Times_3 = new Times_Ni(3);
-	Matcher* Matcher_Times_5 = new Times_Ni(5);
-	Matcher* Matcher_Times_7 = new Times_Ni(7);
+	Action* action_special_num_fizz = new SpecialNumAction("Fizz");
+	Action* action_special_num_buzz = new SpecialNumAction("Buzz");
+	Action* action_special_num_whizz = new SpecialNumAction("Whizz");
 
-	Matcher* Matcher_Contains_3 = new Contains_Ni(3);
-
-	Action* Action_SpecialNum_Fizz = new SpecialNumAction("Fizz");
-	Action* Action_SpecialNum_Buzz = new SpecialNumAction("Buzz");
-	Action* Action_SpecialNum_Whizz = new SpecialNumAction("Whizz");
-
-	Rule* r1n1 = new Atom(Matcher_Times_3, Action_SpecialNum_Fizz);
-	Rule* r1n2 = new Atom(Matcher_Times_5, Action_SpecialNum_Buzz);
-	Rule* r1n3 = new Atom(Matcher_Times_7, Action_SpecialNum_Whizz);
+	//TODO:Code Besides Should Be Refactor To DSL
+	Rule* r1n1 = new Atom(matcher_times_3, action_special_num_fizz);
+	Rule* r1n2 = new Atom(matcher_times_5, action_special_num_buzz);
+	Rule* r1n3 = new Atom(matcher_times_7, action_special_num_whizz);
 
 	Rule* r1 = new AllOf({ r1n1, r1n2, r1n3 });
-	Rule* r2n1 = new Atom(Matcher_Contains_3, Action_SpecialNum_Fizz);
-	Rule* r3 = new Atom(Matcher_Always, Action_Default);
+	Rule* r2n1 = new Atom(matcher_contains_3, action_special_num_fizz);
+	Rule* r3 = new Atom(matcher_always, action_default);
 
 	Rule* ri = new AnyOf({ r2n1, r1, r3 });
 
-	//TEST
+	//TODO:Should Use Test FrameWork
 	for (int i = 1; i <= 100; i++)
 	{
 		cout << ri->Apply(i) << endl;

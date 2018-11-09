@@ -1,28 +1,28 @@
 #include "Rule.h"
 
-string Atom::Apply(int Num)
+string Atom::Apply(int num)
 {
-	if (AtomMatcher->match(Num))
-		return AtomAction->excute(Num);
+	if (AtomMatcher->match(num))
+		return AtomAction->excute(num);
 	return "";
 }
 
-string AllOf::Apply(int Num)
+string AllOf::Apply(int num)
 {
 	string Result;
-	for (auto Rule:Rules)
+	for (auto Rule:rules)
 	{
-		Result.append(Rule->Apply(Num));
+		Result.append(Rule->Apply(num));
 	}
 	return Result;
 }
 
-string AnyOf::Apply(int Num)
+string AnyOf::Apply(int num)
 {
 	string Result;
-	for (Rule* RulePtr : Rules)
+	for (Rule* RulePtr : rules)
 	{
-		Result = RulePtr->Apply(Num);
+		Result = RulePtr->Apply(num);
 		if (Result.size() > 0) break;
 	}
 	return Result;

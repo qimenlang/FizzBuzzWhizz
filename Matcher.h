@@ -5,25 +5,25 @@ class Matcher
 {
 public:
 	virtual ~Matcher() {};
-	virtual bool match(int InNum) = 0;
+	virtual bool match(int num) = 0;
 private:
 };
-class Times_Ni:public Matcher
+class TimesMatcher:public Matcher
 {
 public:
-	Times_Ni(int InBase):base(InBase) {};
-	~Times_Ni() {};
-	virtual bool match(int InNum) override;
+	TimesMatcher(int base):base(base) {};
+	~TimesMatcher() {};
+	virtual bool match(int num) override;
 private:
 	int base;
 };
 
-class Contains_Ni :public Matcher
+class ContainsMatcher :public Matcher
 {
 public:
-	Contains_Ni(int InBase) :base(InBase) {};
-	~Contains_Ni() {};
-	virtual bool match(int InNum) override;
+	ContainsMatcher(int base) :base(base) {};
+	~ContainsMatcher() {};
+	virtual bool match(int num) override;
 private:
 	int base;
 };
@@ -32,5 +32,5 @@ class Always:public Matcher
 {
 public:
 	~Always(){};
-	virtual bool match(int InNum) override; 
+	virtual bool match(int num) override; 
 };
