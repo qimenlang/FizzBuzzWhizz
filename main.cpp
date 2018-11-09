@@ -1,8 +1,27 @@
 #include<iostream>
+#include"assert.h"
 #include"Action.h"
 #include"Matcher.h"
 #include"Rule.h"
 using namespace std;
+
+void rule(Rule* ri,int num, const string& expect)
+{
+	assert(ri->Apply(num)==expect);
+}
+void test(Rule* ri)
+{
+	rule(ri, 3, "Fizz");
+	rule(ri, 5, "Buzz");
+	rule(ri, 7, "Whizz");
+	rule(ri, 3*5, "FizzBuzz");
+	rule(ri, 5*7, "Fizz");
+	rule(ri, 3*7, "FizzWhizz");
+	rule(ri, 3*5*7, "FizzBuzzWhizz");
+	rule(ri, 123, "Fizz");
+	rule(ri, 1, "1");
+	rule(ri, 1004, "1004");
+}
 
 int main()
 {
@@ -31,6 +50,8 @@ int main()
 	Rule* ri = new AnyOf({ r2n1, r1, r3 });
 
 	//TODO:Should Use Test FrameWork
+	test(ri);
+	
 	for (int i = 1; i <= 100; i++)
 	{
 		cout << ri->Apply(i) << endl;
