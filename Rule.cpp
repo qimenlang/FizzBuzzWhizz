@@ -2,10 +2,9 @@
 
 string Atom::Apply(int Num)
 {
-	string Result;
 	if (AtomMatcher->match(Num))
 		return AtomAction->excute(Num);
-	return Result;
+	return "";
 }
 
 string AllOf::Apply(int Num)
@@ -21,16 +20,10 @@ string AllOf::Apply(int Num)
 string AnyOf::Apply(int Num)
 {
 	string Result;
-	string TempResult;
 	for (Rule* RulePtr : Rules)
 	{
-		TempResult = RulePtr->Apply(Num);
-		if (TempResult.size() > 0)
-		{
-			Result = TempResult;
-			TempResult.clear();
-			break;
-		}
+		Result = RulePtr->Apply(Num);
+		if (Result.size() > 0) break;
 	}
 	return Result;
 }

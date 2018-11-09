@@ -1,0 +1,10 @@
+
+Debug/FizzBuzzWhizz.log
+Debug/FizzBuzzWhizz.log
+Debug/FizzBuzzWhizz.tlog/CL.write.1.tlog
+Debug/main.obj
+Debug/Rule.obj
+*.idb
+*.obj
+*.tlog
+*.log

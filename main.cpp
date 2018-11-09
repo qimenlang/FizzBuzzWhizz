@@ -69,5 +69,6 @@ int main()
 	{
 		cout << ri->Apply(i) << endl;
 	}
+	getchar();
 	return 0;
 }
