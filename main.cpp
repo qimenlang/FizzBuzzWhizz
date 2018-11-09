@@ -69,8 +69,5 @@ int main()
 	{
 		cout << ri->Apply(i) << endl;
 	}
-	string test_find = "1";
-	cout << test_find.find(string("3"));
-	getchar();
 	return 0;
 }
