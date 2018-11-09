@@ -31,10 +31,14 @@ int main()
 	AnyOf(r2,r1,r3)
 	AnyOf(r2,AllOf(r1n1,r2n2,r3n3),r3)
 	*/
+	Matcher* Matcher_Always = new Always();
+	Action* Action_Default = new DefaultAction();
 
 	Matcher* Matcher_Times_3 = new Times_Ni(3);
 	Matcher* Matcher_Times_5 = new Times_Ni(5);
 	Matcher* Matcher_Times_7 = new Times_Ni(7);
+
+	Matcher* Matcher_Contains_3 = new Contains_Ni(3);
 
 	Action* Action_SpecialNum_Fizz = new SpecialNumAction("Fizz");
 	Action* Action_SpecialNum_Buzz = new SpecialNumAction("Buzz");
@@ -44,25 +48,11 @@ int main()
 	Rule* r1n2 = new Atom(Matcher_Times_5, Action_SpecialNum_Buzz);
 	Rule* r1n3 = new Atom(Matcher_Times_7, Action_SpecialNum_Whizz);
 
-	vector<Rule*> Rule_All;
-	Rule_All.push_back(r1n1);
-	Rule_All.push_back(r1n2);
-	Rule_All.push_back(r1n3);
-
-	Rule* r1 = new AllOf(Rule_All);
-
-	Matcher* Matcher_Contains_3 = new Contains_Ni(3);
+	Rule* r1 = new AllOf({ r1n1, r1n2, r1n3 });
 	Rule* r2n1 = new Atom(Matcher_Contains_3, Action_SpecialNum_Fizz);
-
-	Matcher* Matcher_Always = new Always();
-	Action* Action_Default = new DefaultAction();
 	Rule* r3 = new Atom(Matcher_Always, Action_Default);
 
-	vector<Rule*> Rule_Any;//在Any中体现匹配的优先级
-	Rule_Any.push_back(r2n1);
-	Rule_Any.push_back(r1);
-	Rule_Any.push_back(r3);
-	Rule* ri = new AnyOf(Rule_Any);
+	Rule* ri = new AnyOf({ r2n1, r1, r3 });
 
 	//TEST
 	for (int i = 1; i <= 100; i++)

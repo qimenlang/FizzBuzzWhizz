@@ -26,7 +26,7 @@ private:
 class AllOf:public Rule
 {
 public:
-	AllOf(vector<Rule*>& InRules) :Rules(InRules) {};
+	AllOf(vector<Rule*>&& InRules) :Rules(InRules) {};
 	~AllOf() {};
 	virtual  string Apply(int Num) override;
 private:
@@ -36,7 +36,7 @@ private:
 class AnyOf :public Rule
 {
 public:
-	AnyOf(vector<Rule*>& InRules) :Rules(InRules) {};
+	AnyOf(vector<Rule*>&& InRules) :Rules(InRules) {};
 	~AnyOf() {};
 	virtual  string Apply(int Num) override;
 private:
