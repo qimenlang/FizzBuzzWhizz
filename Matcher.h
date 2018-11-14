@@ -1,5 +1,7 @@
 #pragma once
+#include<iostream>
 #include<string>
+#include<memory>
 using namespace std;
 class Matcher
 {
@@ -12,7 +14,7 @@ class TimesMatcher:public Matcher
 {
 public:
 	TimesMatcher(int base):base(base) {};
-	~TimesMatcher() {};
+	~TimesMatcher() { cout << "~TimesMatcher()" << endl; };
 	virtual bool match(int num) override;
 private:
 	int base;
@@ -22,7 +24,7 @@ class ContainsMatcher :public Matcher
 {
 public:
 	ContainsMatcher(int base) :base(base) {};
-	~ContainsMatcher() {};
+	~ContainsMatcher() { cout << "~ContainsMatcher()" << endl; };
 	virtual bool match(int num) override;
 private:
 	int base;
@@ -31,6 +33,6 @@ private:
 class Always:public Matcher
 {
 public:
-	~Always(){};
+	~Always() { cout << "~Always()" << endl; };
 	virtual bool match(int num) override; 
 };

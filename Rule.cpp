@@ -20,7 +20,7 @@ string AllOf::Apply(int num)
 string AnyOf::Apply(int num)
 {
 	string Result;
-	for (Rule* RulePtr : rules)
+	for (auto RulePtr : rules)
 	{
 		Result = RulePtr->Apply(num);
 		if (Result.size() > 0) break;

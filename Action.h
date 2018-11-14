@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include<iostream>
+#include<memory>
 using namespace std;
 class Action
 {
@@ -12,7 +14,7 @@ class SpecialNumAction :public Action
 {
 public:
 	SpecialNumAction(const string& str):base(str){}
-	~SpecialNumAction() {};
+	~SpecialNumAction() { cout << "~SpecialNumAction()" << endl; };
 	virtual string excute(int num) override;
 private:
 	string base;
@@ -22,6 +24,6 @@ class DefaultAction :public Action
 {
 public:
 	DefaultAction() {};
-	~DefaultAction() {};
+	~DefaultAction() { cout << "~DefaultAction()" << endl; };
 	virtual string excute(int num) override;
 };
