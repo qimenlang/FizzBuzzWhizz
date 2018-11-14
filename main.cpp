@@ -15,23 +15,23 @@ public:
 		shared_ptr<Matcher> matcher_always (new Always());
 		shared_ptr<Action> action_default(new DefaultAction());
 
-		shared_ptr<Matcher> matcher_times_3(new TimesMatcher(3));
-		shared_ptr<Matcher> matcher_times_5(new TimesMatcher(5));
-		shared_ptr<Matcher> matcher_times_7(new TimesMatcher(7));
+		shared_ptr<Matcher> matcher_times_1(new TimesMatcher(num1));
+		shared_ptr<Matcher> matcher_times_2(new TimesMatcher(num2));
+		shared_ptr<Matcher> matcher_times_3(new TimesMatcher(num3));
 
-		shared_ptr<Matcher> matcher_contains_3(new ContainsMatcher(3));
+		shared_ptr<Matcher> matcher_contains_1(new ContainsMatcher(num1));
 
 		shared_ptr<Action> action_special_num_fizz(new SpecialNumAction("Fizz"));
 		shared_ptr<Action> action_special_num_buzz(new SpecialNumAction("Buzz"));
 		shared_ptr<Action> action_special_num_whizz(new SpecialNumAction("Whizz"));
 
 		//TODO:Code Besides Should Be Refactor To DSL
-		shared_ptr<Rule> r1n1(new Atom(matcher_times_3, action_special_num_fizz));
-		shared_ptr<Rule> r1n2(new Atom(matcher_times_5, action_special_num_buzz));
-		shared_ptr<Rule> r1n3(new Atom(matcher_times_7, action_special_num_whizz));
+		shared_ptr<Rule> r1n1(new Atom(matcher_times_1, action_special_num_fizz));
+		shared_ptr<Rule> r1n2(new Atom(matcher_times_2, action_special_num_buzz));
+		shared_ptr<Rule> r1n3(new Atom(matcher_times_3, action_special_num_whizz));
 
 		shared_ptr<Rule> r1(new AllOf({ r1n1, r1n2, r1n3 }));
-		shared_ptr<Rule> r2n1(new Atom(matcher_contains_3, action_special_num_fizz));
+		shared_ptr<Rule> r2n1(new Atom(matcher_contains_1, action_special_num_fizz));
 		shared_ptr<Rule> r3(new Atom(matcher_always, action_default));
 		rule = shared_ptr<Rule>(new AnyOf({ r2n1, r1, r3}));
 	}
@@ -82,8 +82,7 @@ int main(int argc,char* argv[])
 {
 	testing::InitGoogleTest(&argc, argv);
 	RUN_ALL_TESTS();
-
-	Game* fizz_game = new Game(3, 5, 7);
+	Game* fizz_game = new Game(2, 5, 11);
 	for (int i = 1; i <= 100; i++)
 	{
 		cout << fizz_game->play(i) << endl;
